@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ComponenteProdutos from './components/ComponenteProdutos/ComponenteProdutos';
+import { Footer, Header, LayoutMain, MainCommerce, MainProdutos, MenuCarrinho, MenuFiltros } from './styled/AppStyled';
 
-function App() {
+
+class App extends React.Component {
+  render(){
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LayoutMain>
+      <Header>Header</Header>
+      <MainCommerce>
+        <MenuFiltros>MenuFiltros</MenuFiltros>
+        <MainProdutos>
+          <ComponenteProdutos />
+        </MainProdutos>
+        <MenuCarrinho>MenuCarrinho</MenuCarrinho>
+      </MainCommerce>
+      <Footer>footer</Footer>
+    </LayoutMain>
   );
+  }
 }
 
 export default App;
