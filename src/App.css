@@ -6,3 +6,7 @@
 .ContainerGrid{
   height: 400px;
 }
+
+.ContainerFlex{
+  display: flex;
+}

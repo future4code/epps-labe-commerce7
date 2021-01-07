@@ -1,16 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ComponentFiltros from './components/ComponentFiltros/ComponentFiltros';
 import GridProdutos from './components/gridprodutos/gridprodutos'
 
-function App() {
-  return (
-    <div className="App">
-      <div className='ContainerGrid'>
-        <GridProdutos />
+class App extends React.Component {
+
+  state={
+    valorMinimo: '',
+    valorMaximo: '',
+    filtraNome: ''
+  }
+
+  render(){
+        return (
+      <div className="ContainerFlex">
+        <div>
+          <ComponentFiltros 
+            
+          />
+        </div>
+        <div className='ContainerGrid'>
+          <GridProdutos />
+        </div>
+        <div>Area Carrinho</div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
