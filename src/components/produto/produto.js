@@ -7,11 +7,12 @@ position: relative;
 flex-direction: column;
 border: 1px solid black;
 height: 460px;
-width: 400px;
+width: 320px;
 padding: 5px;
+margin: 10px;
 `
 const DivImg = styled.div`
-width: 400px;
+width: 320px;
 height: 300px;
 `
 const ImgProduto = styled.img`
@@ -33,7 +34,7 @@ font-weight: 900;
 `
 
 const BotaoAdicionar = styled.button`
-width: 400px;
+width: 320px;
 height: 50px;
 background-color: #3282b8;
 color: white;
@@ -48,11 +49,13 @@ export default class Produto extends React.Component {
     return (
       <DivContainer>
         <DivImg>
-          <ImgProduto src={this.props.imagemProduto}/>
+          <ImgProduto src={this.props.imagemProduto} />
         </DivImg>
         <NomeProduto>{this.props.nomeProduto}</NomeProduto>
         <PrecoProduto>R$ {this.props.precoProduto}</PrecoProduto>
-        <BotaoAdicionar>Adicionar ao carrinho</BotaoAdicionar>
+        <BotaoAdicionar onClick={this.props.adicionarCarrinho}>
+          {this.props.carrinho ? 'Remover do carrinho' : 'Adicionar ao carrinho'}
+          </BotaoAdicionar>
       </DivContainer>
     )
   }
