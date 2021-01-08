@@ -1,84 +1,141 @@
-import React from "react";
-import "./App.css";
-import logo from "./youtube.png";
-import menu from "./hamburguer.png"
-import imgcopia from "./imgcopia.png"
+import React from 'react';
+import {Filtro} from './components/Filtro/Filtro';
+import {Produtos} from './components/Produtos/Produtos';
+import {Carrinho} from './components/Carrinho/Carrinho';
+import styled from 'styled-components';
+import condicionador from './img.jpg';
 
-function App() {
-  const titulo = "Titulo do video"
 
-  function reproduzVideo() {
-    alert("O vídeo está sendo reproduzido")
+const AppContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  padding:10px;
+  gap:4px;
+  `;
+
+  const produtos = [
+    {
+      id: 1,
+      nome: 'Produto 1',
+      preco: 100,
+      foto: ''
+    },
+    {
+      id: 2,
+      nome: 'Produto 2',
+      preco: 200,
+      foto: ''
+    },
+    {
+      id: 3,
+      nome: 'Produto 3',
+      preco: 300,
+      foto: ''
+    },
+    {
+      id: 4,
+      nome: 'Produto 4',
+      preco: 400,
+      foto: ''
+    },
+    {
+      id: 5,
+      nome: 'Produto 5',
+      preco: 500,
+      foto: ''
+    },
+    {
+      id: 6,
+      nome: 'Produto 6',
+      preco: 600,
+      foto: ''
+    }
+]
+
+class App extends React.Component {
+  state = {
+    filtroMin:"10",
+    filtroMax: "1000",
+    filtroNome:'',
+      produtosCarrinho: [] 
   }
 
+  onChangeFiltroMin = (event) => {
+    this.setState({filtroMin: event.target.value})
+  }
+
+  onChangeFiltroMax = (event) => {
+    this.setState({filtroMax: event.target.value})
+  }
+
+  onChangeFiltroNome = (event) => {
+    this.setState({filtroNome: event.target.value})
+  }
+
+  onAddProdutoCarrinho = (produtosId) =>{
+    const prodCarrinho = this.state.produtosCarrinho.find(produtos => produtosId === produtos.id)
+
+    if(prodCarrinho){
+      const newProdtsCarrrinho = this.state.produtosCarrinho.map(produtos =>{
+        if(produtosId === produtos.id){
+          return{
+            ...produtos,
+            qtd: produtos.qtd + 1
+          }
+        }
+        return produtos
+      }) 
+      this.setState({produtosCarrinho: newProdtsCarrrinho})
+    } else{
+      const produtoAdd = produtos.find(produtos => produtosId === produtos.id)
+
+      const newProdtsCarrrinho = [...this.state.produtosCarrinho,{...produtoAdd, qtd: 1}]
+
+      this.setState({produtosCarrinho: newProdtsCarrrinho})
+    }
+
+  }
+
+  onRemoverProdutoCarrinho = (produtosId) =>{
+    const newProdtsCarrrinho = this.state.produtosCarrinho.map((produtos) =>{
+      if(produtos.id === produtosId){
+        return{
+          ...produtos,
+          qtd: produtos.qtd - 1
+        }
+      }
+      return produtos
+    }).filter((produtos) => produtos.qtd > 0)
+
+    this.setState({produtosCarrinho: newProdtsCarrrinho})
+
+  }
+
+  render(){
   return (
-    <body>
-      <div className="tela-inteira">
-        <header>
-        <img className=" " src={menu} />
-          <img className="logo" src={logo} />
-          <h1>LabTube<sup>BR</sup></h1>
-          <input type="text" placeholder="Pesquisar" id="campoDeBusca" />
-          <img className="img-busca" src=" " />
-          <img className="menu-img-copia" src={imgcopia} />
-        </header>
-
-        <main>
-          <nav className="menu-vertical">
-            <ul>
-              <li className="botoes-meunu-vertical"><img className="icones-menu" src=" " />Início</li>
-              <li className="botoes-meunu-vertical">
-              <img className="icones-menu" src=" " />Em alta</li>
-              <li className="botoes-meunu-vertical">
-              <img className="icones-menu" src=" />Inscrições</li>
-              <hr />
-              <li className="botoes-meunu-vertical"><img className="iconesps" />Originais</li>
-              <li className="botoes-meunu-vertical"><img className="icones-menu" src="" />Histórico</li>
-            </ul>
-          </nav>
-
-          <section className="painel-de-videos">
-            <div className="box-pagina-principal media1" onClick={reproduzVideo}>
-              <img src " alt="" />
-              <h4>{titulo}</h4>
-            </div>
-            <div className="box-pagina-principal media2" onClick={reproduzVideo}>
-              <img src=" " alt="" />
-              <h4>{titulo}</h4>
-            </div>
-            <div className="box-pagina-principal media3" onClick={reproduzVideo}>
-              <img src=" " alt="" />
-              <h4>{titulo}</h4>
-            </div>
-            <div className="box-pagina-principal media4" onClick={reproduzVideo}>
-              <img src=" " alt="" />
-              <h4>{titulo}</h4>
-            </div>
-            <div className="box-pagina-principal media5" onClick={reproduzVideo}>
-              <img src=" " alt="" />
-              <h4>{titulo}</h4>
-            </div>
-            <div className="box-pagina-principal media6" onClick={reproduzVideo}>
-              <img src=" " alt="" />
-              <h4>{titulo}</h4>
-            </div>
-            <div className="box-pagina-principal media7" onClick={reproduzVideo}>
-              <img src=" " alt="" />
-              <h4>{titulo}</h4>
-            </div>
-            <div className="box-pagina-principal media8" onClick={reproduzVideo}>
-              <img src=" " alt="" />
-              <h4>{titulo}</h4>
-            </div>
-          </section>
-        </main>
-        
-        <footer>
-          <h4>streaming desenvovimento</h4>
-        </footer>
-      </div>
-    </body>
+     <AppContainer>
+      <Filtro
+      min={this.state.filtroMin}
+      max={this.state.filtroMax}
+      nome={this.state.filtroNome}
+      onChangeFiltroMin={this.onChangeFiltroMin}
+      onChangeFiltroMax={this.onChangeFiltroMax}
+      onChangeFiltroNome={this.onChangeFiltroNome}
+      />
+      <Produtos 
+      produtos={produtos}
+      min={this.state.filtroMin}
+      max={this.state.filtroMax}
+      nome={this.state.filtroNome}
+      onAddProdutoCarrinho={this.onAddProdutoCarrinho}
+      />
+      <Carrinho
+      carrinho={this.state.produtosCarrinho}
+      onRemoverProdutoCarrinho={this.onRemoverProdutoCarrinho}
+      />
+    </AppContainer>
   );
+ }
 }
 
 export default App;
