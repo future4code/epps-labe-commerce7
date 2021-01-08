@@ -5,24 +5,36 @@ import GridProdutos from './components/gridprodutos/gridprodutos'
 
 class App extends React.Component {
 
-  state={
+  state = {
     valorMinimo: '',
     valorMaximo: '',
     filtraNome: ''
   }
 
-  render(){
-        return (
+  onChangeMinimo = (event) => {
+    console.log(event.target.value)
+    this.setState({ valorMinimo: event.target.value })
+  }
+
+  onChangeMaximo = (event) => {
+    this.setState({ valorMaximo: event.target.value })
+  }
+
+  render() {
+    
+    return (
       <div className="ContainerFlex">
         <div>
-          <ComponentFiltros 
-            
+          <ComponentFiltros
+            inputMinimo={this.state.valorMinimo} atualizaValorMinimo={this.onChangeMinimo}
+            inputMaximo={this.state.valorMaximo} atualizaValorMaximo={this.onChangeMaximo}
+            inputNome={this.state.filtraNome}
           />
         </div>
         <div className='ContainerGrid'>
-          <GridProdutos />
+          {/* <GridProdutos /> */}
         </div>
-        <div>Area Carrinho</div>
+        {/* <div>Area Carrinho</div> */}
       </div>
     );
   }
