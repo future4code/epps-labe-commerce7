@@ -50,9 +50,9 @@ class App extends React.Component {
         </div>
         <div className='ContainerGrid'>
           
-          {/* <GridProdutos
+          <GridProdutos
            
-          /> */}
+          />
         </div>
         <div>Area Carrinho</div>
       </div>
