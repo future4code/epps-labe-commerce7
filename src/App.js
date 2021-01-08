@@ -1,18 +1,21 @@
 import React from 'react';
 import './App.css';
+
+import listaProdutos from './db/dbProdutos'
+
 import ComponentFiltros from './components/ComponentFiltros/ComponentFiltros';
 import GridProdutos from './components/gridprodutos/gridprodutos'
 
 class App extends React.Component {
 
   state = {
+    produtos: [listaProdutos],
     valorMinimo: '',
     valorMaximo: '',
     filtraNome: ''
   }
 
   onChangeMinimo = (event) => {
-    console.log(event.target.value)
     this.setState({ valorMinimo: event.target.value })
   }
 
@@ -21,7 +24,21 @@ class App extends React.Component {
   }
 
   render() {
-    
+
+    const listaFiltrada = this.state.produtos.filter((item) => {
+      if (item.precoProduto >= this.state.valorMinimo) {
+        return true
+      } else {
+        return false
+      }
+    }).filter((item) => {
+      if(item.precoProduto <= this.state.valorMaximo){
+        return true
+      }else{
+        return false
+      }
+    })
+
     return (
       <div className="ContainerFlex">
         <div>
@@ -32,9 +49,12 @@ class App extends React.Component {
           />
         </div>
         <div className='ContainerGrid'>
-          {/* <GridProdutos /> */}
+          
+          {/* <GridProdutos
+           
+          /> */}
         </div>
-        {/* <div>Area Carrinho</div> */}
+        <div>Area Carrinho</div>
       </div>
     );
   }

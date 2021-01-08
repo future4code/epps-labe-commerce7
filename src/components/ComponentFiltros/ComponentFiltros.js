@@ -12,22 +12,20 @@ const ContainerFiltros = styled.div`
 
 export default class ComponentFiltros extends React.Component {    
 
-    render() {
-
-        
+    render() {        
 
         return (
             <ContainerFiltros>
                 <h2>Filtros</h2>
                 <div>
                     <p>Valor minimo</p>
-                    <input type="number"
+                    <input placeholder='R$' type='number'
                         value={this.props.inputMinimo} onChange={this.props.atualizaValorMinimo}
                     />
                 </div>
                 <div>
                     <p>Valor maximo</p>
-                    <input type="number"
+                    <input placeholder='R$' type='number'
                         value={this.props.inputMaximo} onChange={this.props.atualizaValorMaximo}
                     />
                 </div>
