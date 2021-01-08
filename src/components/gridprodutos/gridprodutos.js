@@ -4,10 +4,12 @@ import Produto from '../produto/produto'
 import listaProdutos from '../../db/dbProdutos'
 
 const GridMain = styled.div`
-  display: grid;
+  display: flex;
   width: 100%;
   height: 100%;
-
+  flex-wrap: wrap;
+  /* background-color: #0f4c75; */
+`
 
 export default class GridProdutos extends React.Component {
   produtosRenderizados = listaProdutos.map(pdt => {
