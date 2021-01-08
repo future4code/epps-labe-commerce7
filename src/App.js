@@ -10,8 +10,8 @@ class App extends React.Component {
 
   state = {
     produtos: [listaProdutos],
-    valorMinimo: '',
-    valorMaximo: '',
+    valorMinimo: 0,
+    valorMaximo: 30000,
     filtraNome: ''
   }
 
@@ -25,19 +25,12 @@ class App extends React.Component {
 
   render() {
 
-    const listaFiltrada = this.state.produtos.filter((item) => {
-      if (item.precoProduto >= this.state.valorMinimo) {
-        return true
-      } else {
-        return false
-      }
-    }).filter((item) => {
-      if(item.precoProduto <= this.state.valorMaximo){
-        return true
-      }else{
-        return false
-      }
-    })
+
+    const listaFiltradaInicial = this.state.produtos.filter((item) =>
+      this.state.valorMinimo > 0 ? (item.precoProduto > this.state.valorMinimo) : true)
+
+
+    console.log(listaFiltradaInicial)
 
     return (
       <div className="ContainerFlex">
@@ -49,9 +42,9 @@ class App extends React.Component {
           />
         </div>
         <div className='ContainerGrid'>
-          
+
           <GridProdutos
-           
+
           />
         </div>
         <div>Area Carrinho</div>
