@@ -7,18 +7,25 @@ const GridMain = styled.div`
   display: grid;
   width: 100%;
   height: 100%;
+  `
 
 
 export default class GridProdutos extends React.Component {
-  produtosRenderizados = listaProdutos.map(pdt => {
-    return (<Produto idProduto={pdt.idProduto} nomeProduto={pdt.nomeProduto} 
-      precoProduto={pdt.precoProduto.toLocaleString('pt-br',{minimumFractionDigits: 2})} imagemProduto={pdt.imagemProduto}/>)
-  })
+  // produtosRenderizados = listaProdutos.map(pdt => {
+  //   return (<Produto idProduto={pdt.idProduto} nomeProduto={pdt.nomeProduto} 
+  //     precoProduto={pdt.precoProduto.toLocaleString('pt-br',{minimumFractionDigits: 2})} imagemProduto={pdt.imagemProduto}/>)
+  // })
 
   render() {
+
+    const produtosRenderizados = this.props.listaDeProdutos.map(pdt => {
+      return (<Produto idProduto={pdt.idProduto} nomeProduto={pdt.nomeProduto} 
+        precoProduto={pdt.precoProduto.toLocaleString('pt-br',{minimumFractionDigits: 2})} imagemProduto={pdt.imagemProduto}/>)
+    })
+
     return (
       <GridMain>
-        {this.produtosRenderizados}
+        {produtosRenderizados}
       </GridMain>
     )
   }
